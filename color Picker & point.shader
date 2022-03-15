@@ -28,7 +28,8 @@ Shader "Unlit/colorPicker"
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
             };
-
+	    
+	    sampler2D _MainTex; fixed4 _MainTex_ST;
             fixed4 _Palette;
             float _pointY;
             float _pointX;
