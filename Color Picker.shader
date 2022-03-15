@@ -3,8 +3,6 @@ Shader "Unlit/colorPicker"
     Properties
     {
         _ColorPickup ("Hue", Color) = (1,0,0,1)
-        _HueIntenx("Huex intensity",Range(0,5)) = 1 //调整色相在x方向的强度
-        _HueInteny("Huey intensity",Range(0,5)) = 1 //调整色相在y方向的强度
         _WhiteInten("White intensity",Range(0,5)) = 1 
         _BlackInten("black intensity",Range(0,5)) = 1
     }
@@ -62,10 +60,9 @@ Shader "Unlit/colorPicker"
                 
                 fixed4 whitegredient = lerp(fixed4(1,1,1,1),trans,pow(i.uv.x,_WhiteInten));//因为涉及到渐变，如果用（1,1,1,0）最后出来的颜色渐变会不一样
                 
-                fixed4 colorpickup = lerp(trans,_ColorPickup,pow(i.uv.x,_HueIntenx) * pow(i.uv.y,_HueInteny));
                 //同fixed4 palette = lerp(trans,_ColorPickup,pow(i.uv.x,_HueIntenx)) * lerp(trans,_ColorPickup,pow(i.uv.y,_HueInteny));
 
-                fixed4 col = fixed4((whitegredient.a * whitegredient.rgb + colorpickup.rgb * (1 - whitegredient.a)),1);//合并图层
+                fixed4 col = fixed4((whitegredient.a * whitegredient.rgb + _ColorPickup.rgb * (1 - whitegredient.a)),1);//合并图层
 
                 col = fixed4(blackgredient.a * blackgredient.rgb + col.rgb * (1 - blackgredient.a),1);
                 
