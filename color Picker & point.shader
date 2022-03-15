@@ -29,19 +29,9 @@ Shader "Unlit/colorPicker"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MainTex; fixed4 _MainTex_ST;
             fixed4 _Palette;
-            float _WhiteInten;
-            float _BlackInten;
-            float _pointvertical;
-            float _pointhorizontal;
-            float _clampY;
-            float _clampX;
             float _pointY;
             float _pointX;
-            float _1;
-            float _2;
-
 
             v2f vert (appdata_base v)
             {
@@ -52,7 +42,7 @@ Shader "Unlit/colorPicker"
                 return o;
             }
 
-            float quadraticBezier (float x, float a, float b)
+            float quadraticBezier (float x, float a, float b)//贝塞尔函数
             {
                 float epsilon = 0.00001;
                 a = max(0, min(1, a)); 
